@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>Hello React!</title>
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    //component 'comment'is split into smaller components.
+    function formatDate(date) {
+  return date.toLocaleDateString();
+    }
+      function Comment(props) {
+        return (
+            <div className="Comment">
+            <UserInfo user={props.author} />
+            <div className="Comment-text">
+            {props.text}
+            </div> 
+            <div className="Comment-date">
+            {formatDate(props.date)}
+            </div>
+            </div>
+        ) ;
+      }
+
+      function Avatar(props) {
+        return (
+          <img className="Avatar"
+          src={props.user.avatarUrl}
+          alt={props.user.name}
+          />
+           
+        );
+      }
+
+      function UserInfo(props){
+          return (
+              <div className="UserInfo">
+              <Avatar user={props.user} />
+              <div className="UserInfo-name">
+              {props.user.name}
+              </div>
+              </div>
+          );
+      }
+     
+      const comment = {
+        date: new Date(),
+        text:'I hope your doing fine !',
+        author :{
+          name:'Hi RJ',
+          avatarUrl:'https://media1.tenor.com/images/619fc287c28246ce1348e8b83f62226c/tenor.gif?itemid=12510364',
+        },
+
+      };
+
+      ReactDOM.render(<Comment
+      date={comment.date}
+      text={comment.text}
+      author={comment.author}
+       />,
+      document.getElementById("root"));
+    </script>
+</body>
+
+</html>
